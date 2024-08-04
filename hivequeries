@@ -1,0 +1,41 @@
+
+# To get quotes
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' WITH SERDEPROPERTIES ("separatorChar" = ",","quoteChar" = "\"")
+
+# To skip header
+tblproperties ("skip.header.line.count"="1");
+
+# To read a CSV file
+create table tableName (column1 datatype, column2 datatype , column3 datatype , column4 datatype)
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' 
+STORED AS TEXTFILE ;
+
+# To create movies_metadata1
+create external table movies_metadata1 (adult String, belongs_to_collection String, budget String, genres String, homepage String, tmbdid String, imdbid String, original_language String, original_title String, overview String, popularity double, poster_path String, production_companies String, production_countries String, release_date String, revenue String, runtime String, spoken_languages String, status String, tagline String, title String, video String, vote_average String, vote_count String) ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde' tblproperties ("skip.header.line.count"="1");
+
+# To load data into movies_metadata1
+load data inpath 'the-movies-dataset/movies_metadata.csv' into table movies_metadata1;
+
+# To convert the data types in movies_metadata1 and store it into movies_metadata
+create table movies_metadata as select cast(adult as boolean) as adult, cast(budget as int) as budget, cast(tmbdid as int) as tmdbid, cast(substr(imdbid,3) as int) as imdbid, original_language, overview, cast(popularity as double) as popularity, release_date, cast(revenue as int) as revenue, cast(runtime as int) as runtime, status, tagline, title, cast(video as boolean) as video, cast(vote_average as double) as vote_average, cast(vote_count as int) as vote_count from movies_metadata1;
+
+# To create movies from ml-latest
+create external table movies(movieid int, title String, genres String) row format delimited fields terminated by ',' lines terminated by '\n';
+
+# To load data in movies from movies.csv in ml-latest
+load data inpath 'ml-latest/movies.csv' into table movies;
+
+# To create links table from ml-latest
+create external table links(movieid int, imdbid int, tmdbid int)row format delimited fields terminated by ',' lines terminated by '\n';
+
+# To load in links from links.csv in ml-latest
+load data inpath 'ml-latest/links.csv' into table links;
+
+# To create movielinks by joining movies and links
+create table movielinks as select l.imdbid, l.tmdbid, m.genres from links l join movies m on (m.movieid = l.movieid);
+
+# To create a final table join of movielinks and movies_metadata
+create table final as select m.adult,m.budget, m.tmdbid, m.imdbid, m.original_language, m.overview, m.popularity, m.release_date, m.revenue, m.runtime, m.status, m.tagline, m.title, m.video, m.vote_average, m.vote_count, l.genres from movielinks l join movies_metadata m on (m.tmdbid = l.tmdbid);
+
+# To print column names
+set hive.cli.print.header=true

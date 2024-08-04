@@ -1,0 +1,76 @@
+#For cluster
+
+# Mahout Query for ml-latest-small
+
+mahout recommenditembased -i hdfs://master:9000/user/hduser/cluster6s3/ml-latest-small/ratingsFiltered/ratings-latest.csv -o hdfs://master:9000/user/hduser/cluster6s3/ml-latest-small/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir hdfs://master:9000/user/hduser/cluster6s3/ml-latest-small/temp/ --outputPathForSimilarityMatrix hdfs://master:9000/user/hduser/cluster6s3/ml-latest-small/SimilarityMatrix
+
+Time Taken = 5.590983333333333 minutes
+
+# Mahout Query for ml-latest
+
+mahout recommenditembased -i hdfs://master:9000/user/hduser/cluster6s3/ml-latest/ratingsFiltered/ratings-latest.csv -o hdfs://master:9000/user/hduser/cluster6s3/ml-latest/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir hdfs://master:9000/user/hduser/cluster6s3/ml-latest/temp/ --outputPathForSimilarityMatrix hdfs://master:9000/user/hduser/cluster6s3/ml-latest/SimilarityMatrix
+
+Time Taken = (Minutes: 47.37096666666667)
+
+# Mahout Query for ml-20m
+
+mahout recommenditembased -i hdfs://master:9000/user/hduser/cluster6s3/ml-20m/ratingsFiltered/ratings-latest.csv -o hdfs://master:9000/user/hduser/cluster6s3/ml-20m/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir hdfs://master:9000/user/hduser/cluster6s3/ml-20m/temp/ --outputPathForSimilarityMatrix hdfs://master:9000/user/hduser/cluster6s3/ml-20m/SimilarityMatrix
+
+Time Taken = (Minutes: 40.11978333333333)
+
+# Mahout Query for ml-1m
+
+mahout recommenditembased -i hdfs://master:9000/user/hduser/cluster6s3/ml-1m/ratingsFiltered/ratings-latest.csv -o hdfs://master:9000/user/hduser/cluster6s3/ml-1m/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir hdfs://master:9000/user/hduser/cluster6s3/ml-1m/temp/ --outputPathForSimilarityMatrix hdfs://master:9000/user/hduser/cluster6s3/ml-1m/SimilarityMatrix
+
+Time Taken = (Minutes: 7.402466666666666)
+
+# Mahout Query for ml-10m
+
+mahout recommenditembased -i hdfs://master:9000/user/hduser/cluster6s3/ml-10m/ml-10M100K/ratingsFiltered/ratings-latest.csv -o hdfs://master:9000/user/hduser/cluster6s3/ml-10m/ml-10M100K/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir hdfs://master:9000/user/hduser/cluster6s3/ml-10m/ml-10M100K/temp/ --outputPathForSimilarityMatrix hdfs://master:9000/user/hduser/cluster6s3/ml-10m/ml-10M100K/SimilarityMatrix
+
+Time Taken = (Minutes: 21.021416666666667)
+
+# Hadoop map reduce on 1000 movies
+
+RecSystemDriver		0m52.569s
+MovieRecommender	2m10.383s
+Total				3 Minutes
+
+# For Single Node
+
+
+# Mahout Query for ml-latest-small
+
+mahout recommenditembased -i cluster6s3/ml-latest-small/ratingsFiltered/ratings-latest.csv -o cluster6s3/ml-latest-small/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir cluster6s3/ml-latest-small/temp/ --outputPathForSimilarityMatrix cluster6s3/ml-latest-small/SimilarityMatrix
+
+Time Taken = Minutes: 4.73525
+
+# Mahout Query for ml-latest
+
+mahout recommenditembased -i cluster6s3/ml-latest/ratingsFiltered/ratings-latest.csv -o cluster6s3/ml-latest/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir cluster6s3/ml-latest/temp/ --outputPathForSimilarityMatrix cluster6s3/ml-latest/SimilarityMatrix
+
+Time Taken = Minutes: 51.47115
+
+# Mahout Query for ml-20m	
+
+mahout recommenditembased -i cluster6s3/ml-20m/ratingsFiltered/ratings-latest.csv -o cluster6s3/ml-20m/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir cluster6s3/ml-20m/temp/ --outputPathForSimilarityMatrix cluster6s3/ml-20m/SimilarityMatrix
+
+Time Taken = Minutes: 42.78743333333333
+
+# Mahout Query for ml-1m 
+
+mahout recommenditembased -i cluster6s3/ml-1m/ratingsFiltered/ratings-latest.csv -o cluster6s3/ml-1m/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir cluster6s3/ml-1m/temp/ --outputPathForSimilarityMatrix cluster6s3/ml-1m/SimilarityMatrix
+
+Time Taken = Minutes: 6.872416666666667
+
+# Mahout Query for ml-10m 
+
+mahout recommenditembased -i cluster6s3/ml-10m/ml-10M100K/ratingsFiltered/ratings-latest.csv -o cluster6s3/ml-10m/ml-10M100K/Recommendations -n 10 -s SIMILARITY_PEARSON_CORRELATION --tempDir cluster6s3/ml-10m/ml-10M100K/temp/ --outputPathForSimilarityMatrix cluster6s3/ml-10m/ml-10M100K/SimilarityMatrix
+
+Time Taken = Minutes: 24.012533333333334
+
+# Hadoop map reduce on 1000 movies
+
+RecSystemDriver		0m54.752s
+MovieRecommender	1m52.269s
+Total				2.7 Min
